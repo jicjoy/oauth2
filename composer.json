@@ -1,0 +1,56 @@
+{
+    "name": "wolf/oauth2",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "php",
+        "Oauth2"
+    ],
+    "description": "",
+    "autoload": {
+        "psr-4": {
+            "Wolf\\Authentication\\Oauth2\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "WolfTest\\": "tests"
+        }
+    },
+    "require": {
+        "php": ">=8.1",
+        "ext-bcmath": "*",
+        "ext-json": "*",
+        "ext-pdo": "*",
+        "ext-redis": "*",
+        "ext-swoole": ">=5.0",
+        "defuse/php-encryption": "^2.4",
+        "league/oauth2-server": "^9.1",
+        "psr/container": "^2.0.0",
+        "psr/http-factory": "^1.1.0",
+        "psr/http-message": "^2.0",
+        "psr/http-server-middleware": "^1.0",
+        "symfony/console": "^7.2",
+        "laminas/laminas-diactoros": "^3.5",
+        "symfony/filesystem": "^7.2"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "mockery/mockery": "^1.0",
+        "phpstan/phpstan": "^1.0",
+        "phpunit/phpunit": "^10.0",
+        "swoole/ide-helper": "dev-master"
+    },
+ 
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "scripts": {
+        "test": "phpunit -c phpunit.xml --colors=always",
+        "analyse": "phpstan analyse --memory-limit 1024M -l 0 ./src",
+        "cs-fix": "php-cs-fixer fix $1"
+    }
+}
