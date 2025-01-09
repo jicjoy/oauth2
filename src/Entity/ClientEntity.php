@@ -22,17 +22,20 @@ class ClientEntity implements ClientEntityInterface
     /** @var bool */
     protected $passwordClient;
 
+    protected $user_id = null;
+
     /**
      * Constructor
      *
      * @return void
      */
-    public function __construct(string $identifier, string $name, string $redirectUri, bool $isConfidential = false)
+    public function __construct(string $identifier, string $name, string $redirectUri, bool $isConfidential = false,$user_id = null)
     {
         $this->setIdentifier($identifier);
         $this->name           = $name;
         $this->redirectUri    = explode(',', $redirectUri);
         $this->isConfidential = $isConfidential;
+        $this->user_id        = $user_id;
     }
 
     public function getSecret(): string
@@ -63,5 +66,9 @@ class ClientEntity implements ClientEntityInterface
     public function setPasswordClient(bool $passwordClient): void
     {
         $this->passwordClient = $passwordClient;
+    }
+
+    public function getUserId() {
+         return $this->user_id;
     }
 }

@@ -2,6 +2,7 @@
     "name": "wolf/oauth2",
     "type": "library",
     "license": "MIT",
+    "version": "1.0.0",
     "keywords": [
         "php",
         "Oauth2"

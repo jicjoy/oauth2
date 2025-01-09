@@ -36,7 +36,7 @@ class AuthorizationHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $authRequest = $request->getAttribute(AuthorizationRequest::class);
-      
+   
         return $this->sever->completeAuthorizationRequest(
             $authRequest,
             $this->responseFactory->createResponse()

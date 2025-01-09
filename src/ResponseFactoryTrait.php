@@ -23,6 +23,7 @@ trait ResponseFactoryTrait
          }
 
          $responseFactory = $container->get(ResponseFactoryInterface::class);
+  
          //Assert::isInstanceOf($responseFactory, ResponseFactoryInterface::class);
          return $responseFactory;
 
@@ -40,6 +41,7 @@ trait ResponseFactoryTrait
         /** @var callable():ResponseInterface $responseFactory */
         $responseFactory = $container->get(ResponseInterface::class);
 
+    
         return new CallableResponseFactoryDecorator($responseFactory);
     }
 }

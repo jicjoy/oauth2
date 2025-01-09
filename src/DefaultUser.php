@@ -7,6 +7,8 @@ use Wolf\Authentication\Oauth2\Api\UserInterface;
 final class DefaultUser implements UserInterface
 {
 
+    private $repository = null;
+
     private string $identity;
 
     /** @psalm-var array<int|string, string> */
@@ -57,6 +59,15 @@ final class DefaultUser implements UserInterface
         return $this->details[$name] ?? $default;
     }
 
+    public function hasRole(string $role): bool {
+        return in_array($role, $this->roles);
+    }
+
+    public function setDetail($name,$value):static {
+         $this->details[$name] = $value;
+         return $this;
+    }
+
     /**
      * Get all the details, if any
      *
@@ -64,5 +75,25 @@ final class DefaultUser implements UserInterface
      */
     public function getDetails(): array {
          return $this->details;
+    }
+
+    /**
+     * 
+     * 
+     * @param mixed $repository
+     * @return DefaultUser
+     */
+    public function setRepository($repository):static {
+        $this->repository = $repository;
+        return $this;
+    }
+ 
+    /**
+     * 
+     * 
+     * @return mixed
+     */
+    public function getRepository():mixed {
+        return $this->repository;
     }
 }

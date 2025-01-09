@@ -1,6 +1,7 @@
 <?php
 
 namespace Wolf\Authentication\Oauth2;
+use Laminas\Diactoros\Stream;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use League\OAuth2\Server\ResourceServer;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -8,6 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Wolf\Authentication\Oauth2\Api\UserInterface;
 use Wolf\Authentication\Oauth2\Api\AuthenticationInterface;
+use Wolf\Authentication\Oauth2\Factory\UserFactory;
 use Wolf\Authentication\Oauth2\Response\CallableResponseFactoryDecorator;
 class OAuth2Adapter implements AuthenticationInterface
 {
@@ -26,8 +28,7 @@ class OAuth2Adapter implements AuthenticationInterface
      */
     public function __construct(
         ResourceServer $resourceServer,
-        $responseFactory,
-        callable $userFactory
+        $responseFactory
     ) {
         $this->resourceServer = $resourceServer;
 
@@ -38,6 +39,7 @@ class OAuth2Adapter implements AuthenticationInterface
         }
 
         $this->responseFactory = $responseFactory;
+         $userFactory = new UserFactory();
         $this->userFactory     = static fn(string $identity, array $roles = [], array $details = []): UserInterface
                 =>   $userFactory($identity, $roles, $details);
     }
@@ -72,11 +74,13 @@ class OAuth2Adapter implements AuthenticationInterface
 
     public function unauthorizedResponse(ServerRequestInterface $request): ResponseInterface {
 
-        return $this->responseFactory
-        ->createResponse(401)
-        ->withHeader(
+        
+        $response  = $this->responseFactory
+        ->createResponse(401);
+        return  $response->withHeader(
             'WWW-Authenticate',
             'Bearer realm="OAuth2 token"'
         );
     }
+ 
 }

@@ -25,8 +25,7 @@ class OAuth2AdapterFactory
 
         return new Oauth2\OAuth2Adapter(
             $resourceServer,
-            $this->detectResponseFactory($container),
-            static fn() =>  $container->get(UserInterface::class)
+            $this->detectResponseFactory($container)
         );
     }
 }

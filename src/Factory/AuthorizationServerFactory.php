@@ -19,7 +19,7 @@ class AuthorizationServerFactory
         $accessTokenRepository = $this->getAccessTokenRepository($container);
         $scopeRepository       = $this->getScopeRepository($container);
 
-        $privateKey = $this->getCryptKey($this->getPrivateKey($container), Oauth2\ConfigProvider::CONFIG_PATH.'.private_key');
+        $privateKey = $this->getCryptKey($this->getPrivateKey($container), 'oauth2.private_key');
         $encryptKey = $this->getEncryptionKey($container);
         $grants     = $this->getGrantsConfig($container);
 

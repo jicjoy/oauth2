@@ -31,4 +31,11 @@ interface UserInterface
      * @psalm-return array<string, mixed>
      */
     public function getDetails(): array;
+
+    public function setDetail($name,$value):static;
+
+    public function setRepository($repository):static;
+
+    public function getRepository():mixed;
+    
 }

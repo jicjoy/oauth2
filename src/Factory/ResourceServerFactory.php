@@ -13,8 +13,8 @@ class ResourceServerFactory
     {
       
         $config = $container->get(\Wolf\Authentication\Oauth2\Api\ConfigInterface::class);
-        $config = $config->get(Oauth2\ConfigProvider::CONFIG_PATH);
-  
+        $config = $config->get('oauth2');
+
 
         if (! isset($config['public_key'])) {
             throw new Oauth2\Exception\InvalidConfigException(

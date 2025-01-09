@@ -9,15 +9,25 @@ use Wolf\Authentication\Oauth2\Exception\InvalidConfigException;
 trait ConfigTrait
 {
 
+    public function _initConfig(ContainerInterface $container): void
+    {
+        $config = $container->get(\Wolf\Authentication\Oauth2\Api\ConfigInterface::class);
+      
+        $config = $config->get('oauth2');
+        var_dump($config);
+    }
+
     /**
      * Summary of getConfigArray
      * @param \Psr\Container\ContainerInterface $container
      * @return ?array
      */
-    protected function getConfigArray(ContainerInterface $container,$index = ''):array|string {
+    protected function getConfigArray(ContainerInterface $container, $index = null):array|string {
  
         $config = $container->get(\Wolf\Authentication\Oauth2\Api\ConfigInterface::class);
-        $config = $config->get(ConfigProvider::CONFIG_PATH);
+      
+        $config = $config->get('oauth2');
+       
         return $index && isset($config[$index]) ? $config[$index] :  $config;
     }
 
